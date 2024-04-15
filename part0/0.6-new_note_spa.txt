@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant browser
+    participant server
+    
+    Note left of browser: User creates a new note and saves it
+    Note over browser: Updates DOM with new note and converts it to JSON format
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note over server: Adds new note to the notes page
+
+    server-->>browser: HTML Status code 201 (Created)
+    server-->>browser: [{ "content": "New Note", "date": "2024-04-15" }, ... ]
+    Note over browser: Content-type: application/json 
+
+    Note over browser: The browser executes the event handler function that renders the notes
